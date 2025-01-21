@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import { jwtSecret } from "../Controllers/Authentication/jwtConfig.js";
 
 const authenticateToken = (req, res, next) => {
-  const token = req.cookies.token;
   const authHeader = req.headers["authorization"];
   const token1 = authHeader && authHeader.split(" ")[1];
   if (!token1) {
