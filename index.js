@@ -3,19 +3,43 @@ import ConnectToDb from "./src/Connection/ConnectToDb.js";
 import authRoutes from "./src/Routes/auth.routes.js";
 import messageRoutes from "./src/Routes/message.routes.js";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import usersRoute from "./src/Routes/users.routes.js";
-import { app, server } from "./src/Socket/socket.js";
+import bodyParser from "body-parser";
+import { Server } from "socket.io";
+import http from "http";
 
-app.use(express.json()); //to parse data from req.body
-app.use(cookieParser()); // Use cookie-parser middleware
+const app = express();
+// Create an HTTP server and attach Socket.IO
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Replace with your frontend URL for production
+    methods: ["GET", "POST"],
+  },
+});
+
+app.use((req, res, next) => {
+  req.io = io; // Attach the Socket.IO instance to the request
+  next();
+});
+
+app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", usersRoute);
 
-server.listen(8081, () => {
-  ConnectToDb();
-  console.log("Server is running on port 8081");
+ConnectToDb();
+io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
+  });
+});
+
+server.listen(8082, () => {
+  console.log("Server is running on port 8082");
 });

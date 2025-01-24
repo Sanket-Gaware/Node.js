@@ -26,7 +26,16 @@ const sendMessage = async (req, res) => {
     if (newMessage) {
       conversation.messages.push(newMessage._id);
     }
+    //
     await Promise.all([conversation.save(), newMessage.save()]);
+    // Emit the new message to the connected clients using Socket.IO
+    if (req.io) {
+      req.io.emit("sendMessage", {
+        message: newMessage,
+        participients: [senderId, receiverId],
+      });
+    }
+
     res.status(201).json(newMessage);
   } catch (error) {
     res.status(500).json({ message: error.message });
