@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const UserSchema = mongoose.Schema(
   {
+    profile: {
+      type: String,
+      required: [true, "please select profile"],
+    },
     fullname: {
       type: String,
       required: [true, "name canot be empty"],

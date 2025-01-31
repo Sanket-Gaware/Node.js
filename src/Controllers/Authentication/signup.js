@@ -7,7 +7,8 @@ const passwordRegex =
 
 const signup = async (req, res) => {
   try {
-    const { fullname, username, gender, password, confirmPassword } = req.body;
+    const { profile, fullname, username, gender, password, confirmPassword } =
+      req.body;
     const hashPassword = await bcrypt.hash(password, 7);
     if (!usernameRegex.test(username)) {
       return res.status(500).json({
@@ -23,6 +24,7 @@ const signup = async (req, res) => {
       return res.status(500).json({ message: "Passwords do not match." });
     }
     const user = new User({
+      profile,
       fullname,
       username,
       gender,
@@ -38,6 +40,7 @@ const signup = async (req, res) => {
       //   );
       return res.status(201).json({
         _id: user._id,
+        profile: user.profile,
         fullname: user.fullname,
         username: user.username,
       });
