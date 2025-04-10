@@ -5,4 +5,5 @@ const router = express.Router();
 
 router.get("/", authenticateToken, getUsers);
 
+
 export default router;

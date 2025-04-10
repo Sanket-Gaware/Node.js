@@ -7,15 +7,21 @@ import getProductById from "../Controllers/Crud/getProductById.js";
 import deleteById from "../Controllers/Crud/deleteById.js";
 import deleteByName from "../Controllers/Crud/deleteByName.js";
 import updatedProduct from "../Controllers/Crud/updateProduct.js";
+import sendOTP from "../Controllers/sendOTP.js";
+import verifyOTP from "../Controllers/verifyOTP.js";
 
 const router = express.Router();
 //signup
 router.post("/signup", signup);
 //login
 router.post("/login", login);
+//send-otp
+router.post("/send-otp", sendOTP);
+//verify-Otp
+router.post("/reset-password", verifyOTP);
+
 //add data
 router.post("/products", addProducts);
-
 //get all data
 router.get("/products", getData);
 

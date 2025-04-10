@@ -7,7 +7,8 @@ import usersRoute from "./src/Routes/users.routes.js";
 import bodyParser from "body-parser";
 import { Server } from "socket.io";
 import http from "http";
-
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 // Create an HTTP server and attach Socket.IO
 const server = http.createServer(app);
@@ -40,6 +41,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(8082, () => {
-  console.log("Server is running on port 8082");
+server.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
