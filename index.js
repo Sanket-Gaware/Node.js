@@ -41,6 +41,9 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+// server.listen(process.env.PORT, () => {
+//   console.log(`Server is running on port ${process.env.PORT}`);
+// });
+server.listen(8082, () => {
+  console.log(`Server is running on port 8082`);
 });
