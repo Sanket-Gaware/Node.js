@@ -2,6 +2,7 @@ import express from "express";
 import ConnectToDb from "./src/Connection/ConnectToDb.js";
 import authRoutes from "./src/Routes/auth.routes.js";
 import messageRoutes from "./src/Routes/message.routes.js";
+import memesRoutes from "./src/Routes/memes.routes.js";
 import cors from "cors";
 import usersRoute from "./src/Routes/users.routes.js";
 import bodyParser from "body-parser";
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", usersRoute);
+app.use("/api/memes", memesRoutes);
 
 ConnectToDb();
 io.on("connection", (socket) => {

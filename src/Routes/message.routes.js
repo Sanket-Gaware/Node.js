@@ -9,5 +9,4 @@ const router = express.Router();
 router.post("/sendmessage/:id", authenticateToken, sendMessage);
 router.get("/:id", authenticateToken, getMessages);
 router.get("/getlastmessage/:id", authenticateToken, getLastMessage);
-
 export default router;
