@@ -9,11 +9,18 @@ const storySchema = new mongoose.Schema(
     },
     mediaUrl: { type: String, required: true },
     mediaType: { type: String, enum: ["image", "video"], required: true },
-    expiresAt: { type: Date, required: true },
+
+    //TTL index setup: this will automatically delete the document when it expires
+    expiresAt: {
+      type: Date,
+      required: true,
+      index: { expires: 0 }, // TTL index triggers deletion at the given time
+    },
   },
   {
     timestamps: true,
   }
 );
+
 const Story = mongoose.model("Story", storySchema);
 export default Story;
