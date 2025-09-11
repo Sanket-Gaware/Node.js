@@ -23,7 +23,7 @@ const io = new Server(server, {
 app.use((req, res, next) => {
   req.io = io; // Attach the Socket.IO instance to the request
   next();
-});
+}); 
 
 app.use(express.json());
 app.use(cors());

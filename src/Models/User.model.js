@@ -22,6 +22,9 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // incoming
+    sentRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // outgoing
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

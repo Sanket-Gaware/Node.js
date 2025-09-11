@@ -9,6 +9,11 @@ import deleteByName from "../Controllers/Crud/deleteByName.js";
 import updatedProduct from "../Controllers/Crud/updateProduct.js";
 import sendOTP from "../Controllers/sendOTP.js";
 import verifyOTP from "../Controllers/verifyOTP.js";
+import authenticateToken from "../Middleware/authenticateToken.js";
+import { sendFriendRequest } from "../Controllers/sendFriendRequest .js";
+import { acceptFriendRequest } from "../Controllers/acceptFriendRequest.js";
+import { rejectFriendRequest } from "../Controllers/rejectFriendRequest.js";
+import { getFriends } from "../Controllers/getFriends.js";
 
 const router = express.Router();
 //signup
@@ -36,5 +41,19 @@ router.delete("/products/:name", deleteByName);
 
 //update data
 router.put("/products/:id", updatedProduct);
+
+// Friend routes
+router.post("/users/:id/send-request", authenticateToken, sendFriendRequest);
+router.post(
+  "/users/:id/accept-request",
+  authenticateToken,
+  acceptFriendRequest
+);
+router.post(
+  "/users/:id/reject-request",
+  authenticateToken,
+  rejectFriendRequest
+);
+router.get("/users/friends", authenticateToken, getFriends);
 
 export default router;
