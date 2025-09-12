@@ -1,6 +1,6 @@
 // controllers/getStories.js
 import Story from "../Models/story.model.js";
- 
+
 const getStories = async (req, res) => {
   try {
     const stories = await Story.find({
