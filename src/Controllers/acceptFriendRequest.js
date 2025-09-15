@@ -48,7 +48,7 @@ export const acceptFriendRequest = async (req, res) => {
     if (!receiver.friendRequests.includes(senderId)) {
       return res.status(400).json({ message: "No request from this user" });
     }
-
+ 
     // Remove from requests
     receiver.friendRequests = receiver.friendRequests.filter(
       (id) => id.toString() !== senderId

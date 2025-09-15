@@ -13,10 +13,27 @@ dotenv.config();
 const app = express();
 // Create an HTTP server and attach Socket.IO
 const server = http.createServer(app);
+
+const allowedOrigins = [
+  "http://localhost:5173",          
+  "https://meme-verse-jet.vercel.app",      
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "*", // Replace with your frontend URL for production
-    methods: ["GET", "POST"],
+    origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
   },
 });
 
