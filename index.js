@@ -14,16 +14,12 @@ const app = express();
 // Create an HTTP server and attach Socket.IO
 const server = http.createServer(app);
 
-const allowedOrigins = [
-  "http://localhost:5173",          
-  "https://meme-verse-jet.vercel.app",      
-];
 
 const io = new Server(server, {
   cors: {
-     origin: "https://node-js-view-point.onrender.com", 
+     origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  
   },
 });
 
