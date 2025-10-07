@@ -44,7 +44,7 @@ router.delete("/products/:name", deleteByName);
 router.put("/products/:id", updatedProduct);
 
 // Friend routes
-router.post("/:id/send-request", sendFriendRequest);
+router.post("/:id/send-request", authenticateToken, sendFriendRequest);
 router.post("/:id/accept-request", authenticateToken, acceptFriendRequest);
 router.post("/:id/reject-request", authenticateToken, rejectFriendRequest);
 router.get("/friend-requests", authenticateToken, getAllFriendRequests);

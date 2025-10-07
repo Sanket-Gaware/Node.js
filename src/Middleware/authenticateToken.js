@@ -5,9 +5,9 @@ const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token1 = authHeader && authHeader.split(" ")[1];
   if (!token1) {
-    return res.status(401).json({ message: "Access Denied" });
+    return res.status(401).json({ message: "Access Denied "+token1 });
   }
-
+ 
   try {
     const verified = jwt.verify(token1, jwtSecret);
     req.user = verified;
