@@ -7,7 +7,7 @@ const authenticateToken = (req, res, next) => {
   if (!token1) {
     return res.status(401).json({ message: "Access Denied " });
   }
- 
+
   try {
     const verified = jwt.verify(token1, jwtSecret);
     req.user = verified;

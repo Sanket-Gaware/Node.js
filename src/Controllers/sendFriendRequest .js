@@ -61,6 +61,9 @@ export const sendFriendRequest = async (req, res) => {
     }
 
     sender.sentRequests.push(receiverId);
+    if (!sender.allSentRequests.includes(receiverId)) {
+      sender.allSentRequests.push(receiverId);
+    }
     receiver.friendRequests.push(senderId);
 
     await sender.save();

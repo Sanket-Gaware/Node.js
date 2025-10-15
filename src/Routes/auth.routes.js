@@ -15,6 +15,7 @@ import { acceptFriendRequest } from "../Controllers/acceptFriendRequest.js";
 import { rejectFriendRequest } from "../Controllers/rejectFriendRequest.js";
 import { getFriends } from "../Controllers/getFriends.js";
 import { getAllFriendRequests } from "../Controllers/getAllFriendRequests.js";
+import { getAllSendReq } from "../Controllers/getAllSendReq.js";
 
 const router = express.Router();
 //signup
@@ -48,6 +49,7 @@ router.post("/:id/send-request", authenticateToken, sendFriendRequest);
 router.post("/:id/accept-request", authenticateToken, acceptFriendRequest);
 router.post("/:id/reject-request", authenticateToken, rejectFriendRequest);
 router.get("/friend-requests", authenticateToken, getAllFriendRequests);
+router.get("/all-sent-requests", authenticateToken, getAllSendReq);
 router.get("/friends", authenticateToken, getFriends);
 
 export default router;

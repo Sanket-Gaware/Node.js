@@ -24,6 +24,7 @@ const UserSchema = mongoose.Schema(
     },
     friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // incoming
     sentRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // outgoing
+    allSentRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // incoming
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
