@@ -4,7 +4,7 @@ import User from "../Models/User.model.js";
 export const getAllSendReq = async (req, res) => {
   try {
     const userId = req.user.id;
-    console.log(userId);
+    // console.log(userId);
     // Find user and populate allSentRequests with limited fields
     const user = await User.findById(userId).populate(
       "allSentRequests",
