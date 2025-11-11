@@ -1,6 +1,6 @@
 // routes/storyRoutes.js
 import Story from "../Models/story.model.js";
-
+  
 const addStory = async (req, res) => {
   try {
     const userId = req.params.id;
